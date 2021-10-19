@@ -13,8 +13,7 @@ In this project, we plan to explore the outcomes of n-person duels. Traditional 
 "The authors present a question about the survival probability of players/competitors in truels (duels with 3 participants). While some suggest that in a singular truel with one strongest player, that strongest player has the least likelihood of survival since the other two players will target that player first, Wegerer and Mutlu find that this may not hold at scale. Through the usage of scale-free networks, they model the outcomes of many truels to predict survival probabilities for many different truels leading into each other. Using different probabilities and marksmanship abilities, this model can be simulated for prediction. There is room to explore different ways to approach the way the truel is simulated and add players to make quadruels." (Added by David Tarazi)
 
 [2] Amengual, P., & Toral, R. (2006). Truels, or survival of the weakest. Computing in Science & Engineering, 8(5), 88-95.
-
-TODO: Add annotated bibliography here.
+These authors use a mathematical approach to prove that the strongest player in a truel will most lickely lose if every players plays with optimum stragegy. Since every truel will eventually become a duel once on player is eliminated, players will all try an shoot the player that they least want to be in a duel with first. The strongest player will shoot the second strongest player, the second strongest player will shoot the strongest player, and the weakest player will shoot the strongest player.  With two players shooting at them the strongest player is unlikely to make it to the duel, so most times the duel is the second strongest player and the weakest player. Generally under these conditions the second strongest player will win. This paper explors a number of different truel rules (random, sequential, etc) and a range of different markmanship values for all three players to examine when this paradox of "survival of the weakest" occured. (TODO add more to bibliography)
 
 ## Experiment
 - Create a BA graph with 300 nodes
@@ -55,12 +54,12 @@ In the conclusion of the paper, the authors mentioned this. "As many nodes have 
 
 After making individual duels more random, we still get a problem in that stronger players are still losing. We realized that when replicating this, the number of truels far outnumbered the number of duels (e.g. when `n =300`, `k = 10`, and `seed=3`, there were 74,839 truels and 25,161 duels).
 
-After attempting to troubleshoot what could be wrong, we hypothesized that the model in the original paper was flawed. We noticed in small-scaled testing that when the shooting order of the players were reversed (i.e. the strongest player shot first), the results were similar to that of the papers. As a result, we ran a Monte-Carlo simulation of that scenario. To further verify that this was the case, we redefined our model so that the nodes are arranged in a ring lattice, since the paper makes an attempt to compare scale-free networks to other types of graphs.
+After attempting to troubleshoot what could be wrong by making numerous small changes to our model, we became stumped as to why two models which would be, if not identical, very similar would behave so drastically differently. Then, we noticed in small-scaled testing that when the shooting order of the players were reversed (i.e. the strongest player shot first), the results were similar to that of the papers. As a result, we ran a Monte-Carlo simulation of that scenario. To further verify that this was the case, we redefined our model so that the nodes are arranged in a ring lattice, since the paper makes an attempt to compare scale-free networks to other types of graphs.
 
 ![Replicated Results with Backwards Shooting Order 1](images/Replication_Backward_Shooting_BA.PNG)
 ![Replicated Results with Backwards Shooting Order 2](images/Replication_Backward_Shooting_Lattice.PNG)
 
-The two graphs above replicate the results from the new iteration with a backwards shooting order, as well as a reversed strategy where instead of targeting stronger players, weaker players are targeted instead.
+The two graphs above replicate the results from the new iteration with a backwards shooting order, as well as a reversed strategy where instead of targeting stronger players, weaker players are targeted instead. This raises the question if the original paper might have also been using a model with the shooting order and strategy accidentally reversed. 
 
 ### Predicted Results from Extensions
 
