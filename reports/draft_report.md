@@ -53,8 +53,14 @@ In the conclusion of the paper, the authors mentioned this. "As many nodes have 
 
 ![Replicated Results 2](images/Replication2.png)
 
-After making individual duels more random, we still get a problem in that stronger players are still losing. We realized that when replicating this, the number of truels far outnumbered the number of duels (e.g. when `n =300`, `k = 10`, and `seed=3`, there were 74,839 truels and 25,161 duels)
+After making individual duels more random, we still get a problem in that stronger players are still losing. We realized that when replicating this, the number of truels far outnumbered the number of duels (e.g. when `n =300`, `k = 10`, and `seed=3`, there were 74,839 truels and 25,161 duels).
 
+After attempting to troubleshoot what could be wrong, we hypothesized that the model in the original paper was flawed. We noticed in small-scaled testing that when the shooting order of the players were reversed (i.e. the strongest player shot first), the results were similar to that of the papers. As a result, we ran a Monte-Carlo simulation of that scenario. To further verify that this was the case, we redefined our model so that the nodes are arranged in a ring lattice, since the paper makes an attempt to compare scale-free networks to other types of graphs.
+
+![Replicated Results with Backwards Shooting Order 1](images/Replication_Backward_Shooting_BA.PNG)
+![Replicated Results with Backwards Shooting Order 2](images/Replication_Backward_Shooting_Lattice.PNG)
+
+The two graphs above replicate the results from the new iteration with a backwards shooting order, as well as a reversed strategy where instead of targeting stronger players, weaker players are targeted instead.
 
 ### Predicted Results from Extensions
 
@@ -65,4 +71,4 @@ After making individual duels more random, we still get a problem in that strong
 The two figures above display the predicted results of our two extensions. The first predicts that as the number *n* of people participating in these duels increases, the likelihood of stronger players surviving until the end will decrease, since they will initially face more opposition. The second predicts that changing the number of people participating in truels will have no impact on the survivability of stronger players while the proportions are similar.
 
 ## Concerns
-Originally, there was a concern about the applicability of this experiment on real-world scenarios. However, the paper does suggest that, "apart from being a puzzling but purely theoretical case, a better understanding of this paradox is also crucial when it comes to evolutionary biology because it indicates that competitive skills can only be improved by mutation, not by interactions among more than two individuals in the process of natural selection." [1] If "weaker players of truels survive more than stronger players," why do we see that natural selection tends to choose stronger attributes? While this model is abstract, it does suggest why stronger players do win against weaker players, despite what traditional game theory suggests.
+Originally, there was a concern about the applicability of this experiment on real-world scenarios. However, the paper does suggest that, "apart from being a puzzling but purely theoretical case, a better understanding of this paradox is also crucial when it comes to evolutionary biology because it indicates that competitive skills can only be improved by mutation, not by interactions among more than two individuals in the process of natural selection." [1] If "weaker players of truels survive more than stronger players," why do we see that natural selection tends to choose stronger attributes? While this model is abstract, it does suggest why stronger players do win against weaker players, despite what traditional game theory suggests. Other applications of this model could be regarding how opinions spread.
