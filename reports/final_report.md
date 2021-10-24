@@ -52,11 +52,11 @@ In one of our runs, we accidentally reverse the shooting order and strategy of p
 
 **Figure 3**: Survivability of red, blue, and black players in both scale-free and lattice models over 20 simulations using the adjusted shooting order and strategy. The percentages of survivability in this figure are similar if not identical to those in Figure 1 for scale-free and lattice graphs. In both graphs, *n* = 300 and *k* = 2, since lower k values result in the reattachment function proving fairer for the stronger players.
 
-### Interpretation
+### Conclusion
 
 As the only time that we can replicate Wegener and Mutlus’ results are when we deviate from their stated experimental procedure, we do not think that playing truels in scale-free networks does provide a solution to the “survival of the weakest” paradox. Our model instead supports the results from traditional game theory.
 
-### Further Exploration
+#### Further Exploration
 
 We hypothesize that the paradox of the “survival of the weakest” might not be inherent to truels but rather a product of the artificial constraints placed on shooting order. Amengual, et al. explored both random shooting order and sequential truels (with the weakest player shooting first) However, it might make sense if the player that was most likely to shoot first was also the player with the highest marksmanship. For example, the probability that a player shoots first could be [player’s marksmanship] / [sum of marksmanship for all players.] This might produce a result where the strongest player does tend to win even if all players play with optimal strategy.
 
