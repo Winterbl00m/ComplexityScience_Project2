@@ -8,10 +8,17 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 ## Annotated Bibliography
 
 ## Experiment
-For this experiemt we will create a population of n agents each with two properties p and q.
-"When acting as proposer, the player offers the amount p. When acting as responder, the player rejects any offer smaller than q... In every generation, several random pairs are formed. Suppose each player will be proposer on average r times and be responder the same number of times. The payoffs of all individuals are then summed up. For the next generation, individuals leave a number of offspring proportional to their total payoff. Offspring adopt the strategy of their parents, plus or minus some small random value. Thus, this system in- cludes selection and mutation. As before, we can interpret these dynamics as denoting biological or cultural reproduction. We observe that the evolutionary dynamics lead to a state where all players adopt strategies that are close to the rational strategy... Let us now add the possibility that a proposer can sometimes obtain information on what offers have been accepted by the responder in the past. We stress that the same players need not meet twice. We as- sume that a proposer will offer, whatever is smaller, his own p-value or the minimum offer that he knows has been accepted by the responder during previous encounters. In addition, we include a small probability that proposers will make offers that are reduced by a small, randomly chosen amount. This effect allows a proposer to test for responders who are willing to ac- cept low offers. Hence, p can be seen as a proposer's maximum offer, whereas q rep- resents a responder's minimum acceptance level. Each accepted deal is made known to a fraction w of all players" 
-
-
+- For this experiemt we will create a population of n agents each with two properties p and q.
+- To begin each agents p and q values will be randomly assigned. 
+- "When acting as proposer, the player offers the amount p. When acting as responder, the player rejects any offer smaller than q"
+- "In every generation, several random pairs are formed."
+	-"The proposer will offer, whatever is smaller, [their] own p-value or the minimum offer that [they know] has been accepted by the responder during previous encounters."
+	- There is also "a small probability that proposers will make offers that are reduced by a small, randomly chosen amount."
+	- "Hence, p can be seen as a proposer's maximum offer, whereas q rep- resents a responder's minimum acceptance level."
+	- "Each accepted deal is made known to a fraction w of all players" 
+- "Each player will be proposer on average r times and be responder the same number of times."
+- "The payoffs of all individuals are then summed up. For the next generation, individuals leave a number of offspring proportional to their total payoff. Offspring adopt the strategy of their parents, plus or minus some small random value."
+- We will run the siulation until steay state is reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
 ## Extensions
 
 
@@ -20,7 +27,7 @@ For this experiemt we will create a population of n agents each with two propert
 ### Results from the paper:
 ![Results From Paper](images/Expected_Results.jpg)
 
-
+-
 ### Predicted Results from Extensions
 
 
