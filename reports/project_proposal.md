@@ -40,7 +40,7 @@ Our planned extension is to implement deals between more than two players. One p
 -
 ### Predicted Results from Extensions
 We don't know exactly how changing the group size will affect the "fairness of stragegies that evolve. However, we believe that changing group size will have an effect on the model's behavior; we just don't know if a larger group will make the population more or less "fair"
-![Predicted Results from Extensions](images/Extension_Expected_Results.jpg)
+![Predicted Results from Extensions](images/Expected_Extension_Results.jpg)
 
 
 ## Concerns
