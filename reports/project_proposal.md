@@ -18,7 +18,7 @@ For this experiemt we will create a population of n agents each with two propert
 ## Results
 
 ### Results from the paper:
-![Results From Paper](images/Expected Results.jpg)
+![Results From Paper](images/Expected_Results.jpg)
 
 
 ### Predicted Results from Extensions
