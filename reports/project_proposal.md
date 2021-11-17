@@ -7,7 +7,7 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 
 ## Annotated Bibliography
 
-[Collective dynamics of `small-world' networks](../Original_Paper.pdf)
+![Collective dynamics of `small-world' networks](../Original_Paper.pdf)
 
 Nowak, Martin A.; Page, Karen M.; Sigmund, Karl, Science (Sep 8, 2000): 1773-1775. 
 
@@ -21,24 +21,27 @@ The authors explore why humans choose reason when playing the Ultimatum Game. Ac
 - "In every generation, several random pairs are formed."
 	-"The proposer will offer, whatever is smaller, [their] own p-value or the minimum offer that [they know] has been accepted by the responder during previous encounters."
 	- There is also "a small probability that proposers will make offers that are reduced by a small, randomly chosen amount."
-	- "Hence, p can be seen as a proposer's maximum offer, whereas q rep- resents a responder's minimum acceptance level."
+	- "Hence, p can be seen as a proposer's maximum offer, whereas q represents a responder's minimum acceptance level."
 	- "Each accepted deal is made known to a fraction w of all players" 
 - "Each player will be proposer on average r times and be responder the same number of times."
 - "The payoffs of all individuals are then summed up. For the next generation, individuals leave a number of offspring proportional to their total payoff. Offspring adopt the strategy of their parents, plus or minus some small random value."
 - We will run the siulation until steay state is reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
+
 ## Extensions
 
 
 ## Results
-
 ### Results from the paper:
 ![Results From Paper](images/Expected_Results.jpg)
 
 -
 ### Predicted Results from Extensions
+We don't know exactly how changing the group size will affect the "fairness of stragegies that evolve. However, we believe that changing group size will have an effect on the model's behavior; we just don't know if a larger group will make the population more or less "fair"
+![Predicted Results from Extensions](images/Extension_Expected_Results.jpg)
 
 
 ## Concerns
+
 
 
 ## Next Steps (for this week)
