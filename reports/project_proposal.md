@@ -15,23 +15,27 @@ The authors explore why humans choose reason when playing the Ultimatum Game. Ac
 
 
 ## Experiment
+
 - For this experiemt we will create a population of n agents each with two properties p and q.
 - To begin each agents p and q values will be randomly assigned. 
 - "When acting as proposer, the player offers the amount p. When acting as responder, the player rejects any offer smaller than q"
 - "In every generation, several random pairs are formed."
-	-"The proposer will offer, whatever is smaller, [their] own p-value or the minimum offer that [they know] has been accepted by the responder during previous encounters."
+	- "The proposer will offer, whatever is smaller, [their] own p-value or the minimum offer that [they know] has been accepted by the responder during previous encounters."
 	- There is also "a small probability that proposers will make offers that are reduced by a small, randomly chosen amount."
 	- "Hence, p can be seen as a proposer's maximum offer, whereas q rep- resents a responder's minimum acceptance level."
 	- "Each accepted deal is made known to a fraction w of all players" 
 - "Each player will be proposer on average r times and be responder the same number of times."
 - "The payoffs of all individuals are then summed up. For the next generation, individuals leave a number of offspring proportional to their total payoff. Offspring adopt the strategy of their parents, plus or minus some small random value."
 - We will run the siulation until steay state is reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
+
 ## Extensions
 
+Our planned extension is to implement deals between more than two players. One player will propose a deal, and other players will have to accept it. We can explore both unanimous approval and majority approval. We want to explore how this affects the strategies present in both the base game and in the version with knowledge of a player's previous proposals. 
 
 ## Results
 
 ### Results from the paper:
+
 ![Results From Paper](images/Expected_Results.jpg)
 
 -
@@ -40,6 +44,9 @@ The authors explore why humans choose reason when playing the Ultimatum Game. Ac
 
 ## Concerns
 
+One concern we have is that the strategies will essentially not be affected by the number of people participating in the deal. We certainly could see that with multi-player deals, strategies evolve in the same way as with 2-player deals. However, we could also find that there are more dynamics at play, where the optimal strategy is different with multiple players. 
+
+Another concern we have is the amount of stuff going on outside of this class. This semester has been a very busy one, and will likely continue to be very taxing on us. We want to scope our project appropriately to not overwhelm ourselves. 
 
 ## Next Steps (for this week)
 
