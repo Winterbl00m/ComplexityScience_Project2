@@ -21,7 +21,9 @@ The authors explore why humans choose reason when playing the Ultimatum Game. Ac
 - "When acting as proposer, the player offers the amount p. When acting as responder, the player rejects any offer smaller than q"
 - "In every generation, several random pairs are formed."
 	- "The proposer will offer, whatever is smaller, [their] own p-value or the minimum offer that [they know] has been accepted by the responder during previous encounters."
-	- There is also "a small probability that proposers will make offers that are reduced by a small, randomly chosen amount."
+	- There is also "a small (0.1) probability that proposers will make offers that are reduced by a small, randomly chosen amount (between 0 and 0.1)."
+
+	- 
 	- "Hence, p can be seen as a proposer's maximum offer, whereas q represents a responder's minimum acceptance level."
 	- "Each accepted deal is made known to a fraction w of all players" 
 - "Each player will be proposer on average r times and be responder the same number of times."
