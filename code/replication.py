@@ -68,10 +68,19 @@ class Simulation:
                 proposer.add_payout(1 - offer)
                 responder.add_payout(offer)
 
-            print((proposer.p > responder.q) == (responder.respond(offer)))
+            # print((proposer.p > responder.q) == (responder.respond(offer)))
+        self.reproduce()
 
+    def reproduce(self):
+        weights = [p.payouts for p in self.players]
+        self.players = random.choices(self.players, weights = weights)
+        for child in self.players:
+            child.p += random.uniform(-0.005, 0.005)
+            child.q += random.uniform(-0.005, 0.005)
+            child.payouts = 0
 
 simulation = Simulation(10, 2)
-simulation.step()
+for i in range(10):
+    simulation.step()
 
 
