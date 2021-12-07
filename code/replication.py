@@ -194,6 +194,3 @@ if __name__ == "__main__":
 # plt.plot(avg_qs, label = 'q')
 # plt.legend()
 # plt.show()
-
-
-
