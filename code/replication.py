@@ -1,7 +1,8 @@
 import random
-from random import choices 
+# from random import choices 
 import matplotlib.pyplot as plt
 import numpy as np
+import copy
 
 
 class Agent:
@@ -33,7 +34,7 @@ class Agent:
             offer = self.p 
 
         if (random.random() < 0.1):
-            return offer - random.uniform(-0.1, 0)
+            return offer + random.uniform(-0.1, 0)
 
         return offer
 
@@ -68,7 +69,7 @@ class Simulation:
 
     def step(self):
         for i in range(self.r * self.n):
-            proposer, responder = choices(self.players, k = 2)
+            proposer, responder = random.choices(self.players, k = 2)
             offer = proposer.propose(responder)
             if responder.respond(offer):
                 proposer.add_payout(1 - offer)
@@ -78,23 +79,26 @@ class Simulation:
 
     def reproduce(self):
         weights = [player.payouts for player in self.players]
-        test = random.choices(self.players, weights = weights, k = len(self.players))
+        if sum(weights) == 0: 
+            weights = [1 for player in self.players]
+        # print(weights)
+        test = copy.deepcopy(random.choices(self.players, weights = weights, k = len(self.players)))
         # print(len(self.players))
+        new_agents = []
         for child in test:
-            child.p += random.uniform(-0.005, 0.005)
-            child.q += random.uniform(-0.005, 0.005)
-            if child.p < 0:
-                child.p = 0 
-            elif child.p > 1:
-                child.p = 1
-            if child.q < 0:
-                child.q = 0
-            elif child.q > 1:
-                child.q = 1   
-
-            child.payouts = 0
+            p = child.p + random.uniform(-0.005, 0.005)
+            q = child.q + random.uniform(-0.005, 0.005)
+            if p < 0:
+                p = 0 
+            elif p > 1:
+                p = 1
+            if q < 0:
+                q = 0
+            elif q > 1:
+                q = 1   
+            new_agents.append(Agent(p = p, q = q))
         self.players = None
-        self.players = test
+        self.players = new_agents
 
     def find_average(self, variable):
         if variable == "p":
@@ -113,7 +117,7 @@ class Simulation:
         return avg_qs, avg_ps
 
     def tell(self, responder, offer):
-        for player in choices(self.players, k = int(self.w)):
+        for player in random.choices(self.players, k = int(self.w * self.n)):
             if responder in player.other_players:
                 if offer < player.other_players[responder]:
                     player.other_players[responder] = offer
@@ -122,7 +126,7 @@ class Simulation:
 
 
 # simulation = Simulation(n = 100, r = 50)
-num_steps = 10 ** 3
+num_steps = 10 ** 4
 
 ws = list(np.linspace(0, .35, 8))
 end_qs = []
@@ -152,6 +156,15 @@ plt.legend()
  
 # function to show the plot
 plt.show()
+
+# simulation = Simulation(n = 100, r = 50, w = 0)
+# avg_qs, avg_ps = simulation.loop(num_steps)
+# print(np.mean(avg_ps))
+# print(np.mean(avg_qs))
+# plt.plot(avg_ps, label = 'p')
+# plt.plot(avg_qs, label = 'q')
+# plt.legend()
+# plt.show()
 
 
 
