@@ -24,12 +24,11 @@ The authors explore why humans choose reason when playing the Ultimatum Game. Ac
 	- There is also "a small (0.1) probability that proposers will make offers that are reduced by a small, randomly chosen amount (between 0 and 0.1)."
 	- "Hence, p can be seen as a proposer's maximum offer, whereas q represents a responder's minimum acceptance level."
 	- "Each accepted deal is made known to a fraction w of all players" 
-- "Each player will be proposer on average r times and be responder the same number of times."
+- "Each player will be proposer on average r (50) times and be responder the same number of times."
 - "The payoffs of all individuals are then summed up. For the next generation, individuals leave a number of offspring proportional to their total payoff. Offspring adopt their parent's p and q values plus a small random number from the interval (-0.005, 0.005)"
-- We will run the siulation until steay state is reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
+- We will run the siulation  for 10^5 generation when equlibrium should be reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
 
-## Extensions
-
+## Extensions(not yet implemented)
 Our planned extension is to implement deals between more than two players. One player will propose a deal, and other players will have to accept it. We can explore both unanimous approval and majority approval. We want to explore how this affects the strategies present in both the base game and in the version with knowledge of a player's previous proposals. 
 
 ## Results
@@ -37,7 +36,9 @@ Our planned extension is to implement deals between more than two players. One p
 On the x-axis is the proportion of players which learn about any one accepted deal(w.) On the y-axis is the opulation's average q (minimum acceptance) and average p(maximum offer.)
 ![Results From Paper](images/Expected_Results.jpg)
 
-### Out Results: 
+### Our Results: 
+Here is our replication results. Because of limited time we only completed 10^4 generations per simulation, so our results are a bit more noisy than the paper's. However, we can see that our results closely match that of the paper's. 
+![Results from Replication](images/Figure_1.png)
 
 
 ### Predicted Results from Extensions
@@ -54,7 +55,7 @@ Another concern we have is the amount of stuff going on outside of this class. T
 
 ## Next Steps (for this week)
 
-For a variety of reasons, we do not plan to make any significant progress this week. The next steps once we do have time to work on this project will be to replicate the model as described in the paper, to give us a base from which to work. 
+Our next steps on this project are to clean up our replication and then begin the extensions. We only just got the replication working, so we want to spend a bit longer on that making sure the code is clean and readable before moving on to expansions.
 
 
 
