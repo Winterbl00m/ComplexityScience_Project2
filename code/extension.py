@@ -52,6 +52,13 @@ class Agent:
         return offer > self.q
 
     def add_payout(self, payout):
+        """
+        Inputs
+        payout: amount of payout to add to this agent
+
+        Returns
+        the total payouts of the player
+        """
         self.payouts += payout
         return self.payouts
 
@@ -71,6 +78,9 @@ class Simulation:
         self.players = [Agent(p = random.uniform(0, 1), q = random.uniform(0, 1)) for i in range(n)]
 
     def step(self):
+        """
+        Simulates a single generation of ultimatuming
+        """
         for i in range(self.r * self.n):
             proposer, responder = random.choices(self.players, k = 2)
             offer = proposer.propose(responder)
@@ -81,6 +91,9 @@ class Simulation:
         self.reproduce()
 
     def reproduce(self):
+        """
+        Selective reproduction of the current players to create the next generation of competitors
+        """
         weights = [player.payouts for player in self.players]
         if sum(weights) == 0: 
             weights = [1 for player in self.players]
@@ -104,13 +117,28 @@ class Simulation:
         self.players = new_agents
 
     def find_average(self, variable):
+        """
+        Inputs:
+        variable: p or q, which variable to return the average of
+
+        Returns:
+        average of the variable for all players this generation
+        """
         if variable == "p":
             temp = [player.p for player in self.players]
         elif variable == "q":
             temp = [player.q for player in self.players]
-        return sum(temp)/len(temp)
+        return np.mean(temp)
 
     def loop(self, num_steps = 100):
+        """
+        Inputs:
+        num_steps: how many generations to run
+
+        Returns:
+        a list of the average p values for each generation
+        a list of the average q values for each generation
+        """
         avg_qs = []
         avg_ps = []
         for step in range(num_steps):
@@ -120,6 +148,12 @@ class Simulation:
         return avg_ps, avg_qs
 
     def tell(self, responder, offer):
+        """
+        Tells a proportion of the players about an accepted offer
+        Inputs:
+        responder: player who accepted
+        offer: the offer they accepted
+        """
         for player in random.choices(self.players, k = int(self.w * self.n)):
             if responder in player.other_players:
                 if offer < player.other_players[responder]:
@@ -127,33 +161,33 @@ class Simulation:
             else:
                 player.other_players[responder] = offer
 
-
-# simulation = Simulation(n = 100, r = 50)
-num_steps = 10 ** 4
-n = 100
-r = 50
-ws = list(np.linspace(0, .35, 8))
-# end_qs = []
-# end_ps = []
-
 def run_simulation(n, r, w, num_steps):
-    simulation = Simulation(n = 100, r = 50, w = w)
-    avg_ps, avg_qs = simulation.loop(num_steps)
-    avg_p = np.mean(avg_ps)
-    avg_q = np.mean(avg_qs)
-    print(f'N: {n}, R: {r}, W: {w}, Num Steps: {num_steps}, Avg P: {avg_p}, Avg Q: {avg_q}')
-    return [n, r, w, num_steps, avg_p, avg_q]
+        """
+        Runs a simulation with specified parameters
+
+        Inputs:
+        n, r, w: simulation parameters
+        num_steps: simulation.loop parameter
+        """
+        simulation = Simulation(n = 100, r = 50, w = w)
+        avg_ps, avg_qs = simulation.loop(num_steps)
+        avg_p = np.mean(avg_ps)
+        avg_q = np.mean(avg_qs)
+        print(f'N: {n}, R: {r}, W: {w}, Num Steps: {num_steps}, Avg P: {avg_p}, Avg Q: {avg_q}')
+        return [n, r, w, num_steps, avg_p, avg_q]
 
 if __name__ == "__main__":
+
+    num_steps = 10 ** 4
+    n = 100
+    r = 50
+    ws = list(np.linspace(0, .35, 8))
+
     params = []
     for i in range(1):
         for w in ws:
             params.append((n, r, w, num_steps))
-            # simulation = Simulation(n = 100, r = 50, w = w)
-            # avg_qs, avg_ps = simulation.loop(num_steps)
-            # end_qs.append(avg_qs[-1])
-            # end_ps.append(avg_ps[-1])
-    with mp.Pool() as pool:
+    with mp.Pool() as pool: # unholy multiprocessing bullshittery
         output_rows = pool.starmap(run_simulation, params)
 
     output_rows.sort()
