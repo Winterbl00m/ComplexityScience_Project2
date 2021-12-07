@@ -33,7 +33,7 @@ class Agent:
             offer = self.p 
 
         if (random.random() < 0.1):
-            return offer - random.uniform(-0.1, 0)
+            return offer + random.uniform(-0.1, 0)
 
         return offer
 
@@ -113,7 +113,7 @@ class Simulation:
         return avg_qs, avg_ps
 
     def tell(self, responder, offer):
-        for player in choices(self.players, k = int(self.w)):
+        for player in choices(self.players, k = int(self.w * self.n)):
             if responder in player.other_players:
                 if offer < player.other_players[responder]:
                     player.other_players[responder] = offer
@@ -122,36 +122,45 @@ class Simulation:
 
 
 # simulation = Simulation(n = 100, r = 50)
-num_steps = 10 ** 3
+num_steps = 10 ** 4
 
-ws = list(np.linspace(0, .35, 8))
-end_qs = []
-end_ps = []
+# ws = list(np.linspace(0, .35, 8))
+# end_qs = []
+# end_ps = []
 
-for w in ws:
-    print(w)
-    simulation = Simulation(n = 100, r = 50, w = w)
-    avg_qs, avg_ps = simulation.loop(num_steps)
-    end_qs.append(avg_qs[-1])
-    end_ps.append(avg_ps[-1])
+# for w in ws:
+#     print(w)
+#     simulation = Simulation(n = 100, r = 50, w = w)
+#     avg_qs, avg_ps = simulation.loop(num_steps)
+#     end_qs.append(avg_qs[-1])
+#     end_ps.append(avg_ps[-1])
+
+# # plotting the points
+# plt.plot(ws, end_ps, label = "p")
+# plt.plot(ws, end_qs, label = "q")
+# # naming the x axis
+# plt.xlabel('w')
+# # naming the y axis
+# plt.ylabel('p, q')
+# plt.legend()
+ 
+# # function to show the plot
+# plt.show()
 
 
 
+
+simulation = Simulation(n = 100, r = 50)
+avg_qs, avg_ps = simulation.loop(num_steps)
 
 # plotting the points
-plt.plot(ws, end_ps, label = "p")
-plt.plot(ws, end_qs, label = "q")
+plt.plot(range(num_steps), avg_qs, label = "p")
+plt.plot(range(num_steps), avg_ps, label = "q")
 # naming the x axis
 plt.xlabel('w')
 # naming the y axis
 plt.ylabel('p, q')
 plt.legend()
  
-# # giving a title to my graph
-# plt.title('My first graph!')
- 
 # function to show the plot
 plt.show()
-
-
-
