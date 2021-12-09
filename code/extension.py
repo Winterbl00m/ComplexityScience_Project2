@@ -1,5 +1,4 @@
 import random
-# from random import choices 
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
@@ -97,9 +96,7 @@ class Simulation:
         weights = [player.payouts for player in self.players]
         if sum(weights) == 0: 
             weights = [1 for player in self.players]
-        # print(weights)
         test = copy.deepcopy(random.choices(self.players, weights = weights, k = len(self.players)))
-        # print(len(self.players))
         new_agents = []
         for child in test:
             p = child.p + random.uniform(-0.005, 0.005)
