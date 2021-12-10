@@ -36,17 +36,61 @@ theme_common <- function() {
 
 ## Original Paper Replication
 
-```{r original-replication}
+```{r load-data}
 df_ultimatum <- read.csv("data/data.csv")
 ```
 
 ```{r original-replication-graph}
 df_ultimatum %>%
+  filter(nPerRound == 2) %>%
+  group_by(n, r, w, nPerRound, num_steps) %>%
+  mutate(
+    mean_p = mean(mean_p),
+    mean_q = mean(mean_q)
+  ) %>%
   ggplot() +
   geom_line(aes(x = w, y = mean_p, color = "mean_p"), size = 1) +
   geom_line(aes(x = w, y = mean_q, color = "mean_q"), size = 1) +
   geom_point(aes(x = w, y = mean_p, color = "mean_p"), size = 2) +
   geom_point(aes(x = w, y = mean_q, color = "mean_q"), size = 2) +
   theme_common()
+```
+
+```{r original-time-graph}
+df_ultimatum %>%
+  filter(idx == 0, nPerRound == 2) %>%
+  group_by(n, r, w, nPerRound, num_steps) %>%
+  # mutate(
+  #   mean_p = mean(mean_p),
+  #   mean_q = mean(mean_q)
+  # ) #%>%
+  ggplot() +
+  geom_line(aes(x = generation, y = mean_p, color = "mean_p"), size = 1) +
+  geom_line(aes(x = generation, y = mean_q, color = "mean_q"), size = 1) +
+  facet_wrap(~w) +
+  # geom_point(aes(x = w, y = mean_p, color = "mean_p"), size = 2) +
+  # geom_point(aes(x = w, y = mean_q, color = "mean_q"), size = 2) +
+  theme_common()
+
+
+```
+
+```{r extension-graph}
+df_ultimatum %>%
+  # filter(nPerRound == 2) %>%
+  group_by(n, r, w, nPerRound) %>%
+  mutate(
+    mean_p = mean(mean_p),
+    mean_q = mean(mean_q)
+  ) %>%
+  ggplot() +
+  geom_line(aes(x = w, y = mean_p, color = "mean_p"), size = 1) +
+  geom_line(aes(x = w, y = mean_q, color = "mean_q"), size = 1) +
+  geom_point(aes(x = w, y = mean_p, color = "mean_p"), size = 2) +
+  geom_point(aes(x = w, y = mean_q, color = "mean_q"), size = 2) +
+  facet_wrap(~ nPerRound) +
+  theme_common()
+
+
 ```
 

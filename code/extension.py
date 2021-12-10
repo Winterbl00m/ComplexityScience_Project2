@@ -1,4 +1,5 @@
 import random
+# from random import choices 
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
@@ -21,24 +22,28 @@ class Agent:
         self.other_players = {}
         self.payouts = 0
 
-    def propose(self, opponent):
+    def propose(self, opponents):
         """
         Inputs
-        opponent : the opposing player who will respond to the proposal
+        opponent : a list of the opposing players who will respond to the proposal
 
         Returns 
-        offer: the offer for the other player to consider
+        offers: the offers for each other player to consider
 
         """
-        if opponent in self.other_players:
-            offer = min([self.p, self.other_players[opponent]])
-        else: 
-            offer = self.p 
+        offers = []
+        for opponent in opponents:
+            if opponent in self.other_players:
+                offer = min([self.p, self.other_players[opponent]])
+            else: 
+                offer = self.p / len(opponents)
 
-        if (random.random() < 0.1):
-            return offer + random.uniform(-0.1, 0)
-
-        return offer
+            if (random.random() < 0.1):
+                offer = offer + random.uniform(-0.1, 0)
+            
+            offers.append(offer)
+            
+        return(offers)
 
     def respond(self, offer):
         """
@@ -62,18 +67,20 @@ class Agent:
         return self.payouts
 
 class Simulation:
-    def __init__(self, n, r, w = 0):
+    def __init__(self, n, r, w = 0, nPerRound = 2):
         """
         n : number of players
         w : 
         r : number of times each player will play each role per round
         other_players : dictionary of other players 
         and offers agent know that they accepted
+        nPerRound : number of players who compete per round
         payouts : total cumulative payout from this simulation
         """
         self.n = n 
         self.w = w 
         self.r = r
+        self.nPerRound = nPerRound
         self.players = [Agent(p = random.uniform(0, 1), q = random.uniform(0, 1)) for i in range(n)]
 
     def step(self):
@@ -81,12 +88,15 @@ class Simulation:
         Simulates a single generation of ultimatuming
         """
         for i in range(self.r * self.n):
-            proposer, responder = random.choices(self.players, k = 2)
-            offer = proposer.propose(responder)
-            if responder.respond(offer):
-                proposer.add_payout(1 - offer)
-                responder.add_payout(offer)
-                self.tell(responder, offer)
+            responders = random.choices(self.players, k = self.nPerRound)
+            proposer = responders.pop(0)
+            offers = proposer.propose(responders)
+            responses = [responders[i].respond(offers[i]) for i in range(len(responders))]
+            accepted = np.mean(responses) > 0.5
+            if accepted:
+                proposer.add_payout(1 - sum(offers))
+                [responders[i].add_payout(offers[i]) for i in range(len(responders))]
+                [self.tell(responders[i], offers[i]) for i in range(len(responders))]
         self.reproduce()
 
     def reproduce(self):
@@ -96,7 +106,9 @@ class Simulation:
         weights = [player.payouts for player in self.players]
         if sum(weights) == 0: 
             weights = [1 for player in self.players]
+        # print(weights)
         test = copy.deepcopy(random.choices(self.players, weights = weights, k = len(self.players)))
+        # print(len(self.players))
         new_agents = []
         for child in test:
             p = child.p + random.uniform(-0.005, 0.005)
@@ -158,7 +170,7 @@ class Simulation:
             else:
                 player.other_players[responder] = offer
 
-def run_simulation(n, r, w, num_steps):
+def run_simulation(idx, n, r, w, nPerRound, num_steps):
         """
         Runs a simulation with specified parameters
 
@@ -166,31 +178,37 @@ def run_simulation(n, r, w, num_steps):
         n, r, w: simulation parameters
         num_steps: simulation.loop parameter
         """
-        simulation = Simulation(n = 100, r = 50, w = w)
+        simulation = Simulation(n = 100, r = 50, w = w, nPerRound = nPerRound)
         avg_ps, avg_qs = simulation.loop(num_steps)
         avg_p = np.mean(avg_ps)
         avg_q = np.mean(avg_qs)
-        print(f'N: {n}, R: {r}, W: {w}, Num Steps: {num_steps}, Avg P: {avg_p}, Avg Q: {avg_q}')
-        return [n, r, w, num_steps, avg_p, avg_q]
+        print(f'idx: {idx}, N: {n}, R: {r}, W: {w}, Players Per Round: {nPerRound}, Num Steps: {num_steps}, Avg P: {avg_p}, Avg Q: {avg_q}')
+        return [[idx, n, r, w, nPerRound, num_steps,  generation, avg_ps[generation], avg_qs[generation]] for generation in range(len(avg_ps))]
+        # return [idx, n, r, w, nPerRound, num_steps, avg_p, avg_q]
 
-if __name__ == "__main__":
+if __name__ == "__main__": # and False:
 
-    num_steps = 10 ** 4
+    num_steps = 10 ** 2
     n = 100
     r = 50
-    ws = list(np.linspace(0, .35, 8))
+    ws = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5]
+    nPerRound = [2, 3, 4, 5, 10]
 
     params = []
     for i in range(1):
         for w in ws:
-            params.append((n, r, w, num_steps))
+            for npr in nPerRound:
+                params.append((i, n, r, w, npr, num_steps))
     with mp.Pool() as pool: # unholy multiprocessing bullshittery
         output_rows = pool.starmap(run_simulation, params)
 
+
+    print("Done with simulations!")
+    output_rows = [item for sublist in output_rows for item in sublist]
     output_rows.sort()
-    headers = ["n", "r", "w", "num_steps", "mean_p", "mean_q"]
+    headers = ["idx", "n", "r", "w", "nPerRound", "num_steps", "generation", "mean_p", "mean_q"]
     output_rows.insert(0, headers)
-    print(output_rows)
+    # print(output_rows)
     
     # Write the output list to CSV
     wd = os.path.dirname(__file__)
@@ -200,25 +218,28 @@ if __name__ == "__main__":
         writer.writerows(output_rows)
 
 
-    end_ps = [r[4] for r in output_rows[1:9]]
-    end_qs = [r[5] for r in output_rows[1:9]]
-    # plotting the points
-    plt.plot(ws, end_ps, label = "p")
-    plt.plot(ws, end_qs, label = "q")
-    # naming the x axis
-    plt.xlabel('w')
-    # naming the y axis
-    plt.ylabel('p, q')
-    plt.legend()
+    # end_ps = [r[5] for r in output_rows[1:]]
+    # end_qs = [r[6] for r in output_rows[1:]]
+    # # plotting the points
+    # plt.plot(ws, end_ps, label = "p")
+    # plt.plot(ws, end_qs, label = "q")
+    # # naming the x axis
+    # plt.xlabel('w')
+    # # naming the y axis
+    # plt.ylabel('p, q')
+    # plt.legend()
      
-    # # giving a title to my graph
-    # plt.title('My first graph!')
+    # # # giving a title to my graph
+    # # plt.title('My first graph!')
      
-    # function to show the plot
-    plt.show()
+    # # function to show the plot
+    # plt.show()
 
-# simulation = Simulation(n = 100, r = 50, w = 0)
+
+# num_steps = 10**3
+# simulation = Simulation(n = 100, r = 50, w = 0, nPerRound = 3)
 # avg_qs, avg_ps = simulation.loop(num_steps)
+# # run_simulation(n = 100, r = 50, w = 0, nPerRound = 2, num_steps=1000)
 # print(np.mean(avg_ps))
 # print(np.mean(avg_qs))
 # plt.plot(avg_ps, label = 'p')
