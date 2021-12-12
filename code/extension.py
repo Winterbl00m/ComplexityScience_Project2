@@ -6,6 +6,8 @@ import copy
 import csv
 import os
 import multiprocessing as mp
+from time import time_ns
+from time import sleep
 
 
 class Agent:
@@ -188,17 +190,19 @@ def run_simulation(idx, n, r, w, nPerRound, num_steps):
 
 if __name__ == "__main__": # and False:
 
-    num_steps = 10 ** 2
+    num_steps = 10 ** 5
     n = 100
     r = 50
-    ws = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5]
-    nPerRound = [2, 3, 4, 5, 10]
+    ws = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35]
+    nPerRound = [2, 3, 5]
 
     params = []
-    for i in range(1):
+    for _ in range(1):
         for w in ws:
             for npr in nPerRound:
+                i = time_ns()
                 params.append((i, n, r, w, npr, num_steps))
+                sleep(0.01)
     with mp.Pool() as pool: # unholy multiprocessing bullshittery
         output_rows = pool.starmap(run_simulation, params)
 
@@ -207,15 +211,16 @@ if __name__ == "__main__": # and False:
     output_rows = [item for sublist in output_rows for item in sublist]
     output_rows.sort()
     headers = ["idx", "n", "r", "w", "nPerRound", "num_steps", "generation", "mean_p", "mean_q"]
-    output_rows.insert(0, headers)
+    # output_rows.insert(0, headers)
     # print(output_rows)
     
     # Write the output list to CSV
     wd = os.path.dirname(__file__)
     path = os.path.join(wd, "data", "data.csv")
-    with open(path, 'w', newline='') as f:
+    with open(path, 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerows(output_rows)
+        
 
 
     # end_ps = [r[5] for r in output_rows[1:]]
