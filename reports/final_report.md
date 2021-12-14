@@ -27,6 +27,11 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 </tr></table>
 **Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal(w.) On the y-axis is the opulation's average q (minimum acceptance) and average p(maximum offer.)
 
+## Results from Extension
+<table><tr>
+<td> <img src="images/extension.png" alt="Drawing" style="width: 1000px;"/> </td>
+</tr></table>
+**Figure 2**: p and q vs w for different number of players
 
 
 ## Conclusion
