@@ -23,7 +23,7 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 ## Results from Replication 
 <table><tr>
 <td> <img src="images/Expected_Results.jpg" alt="Drawing" style="width: 500px;"/> </td>
-<td> <img src="images/Figure_1.png" alt="Drawing" style="width: 500px;"/> </td>
+<td> <img src="images/replication.png" alt="Drawing" style="width: 500px;"/> </td>
 </tr></table>
 **Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal(w.) On the y-axis is the opulation's average q (minimum acceptance) and average p(maximum offer.)
 
