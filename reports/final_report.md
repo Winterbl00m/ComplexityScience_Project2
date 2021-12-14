@@ -21,6 +21,12 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 - We ran the siulation  for 10^4 generation when equlibrium should be reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
 
 ### Extension
+For our extension much of the model above stayed the same, except that instead of only offering to one player the propser is now making an offer to a group of reponders the majority of which need to accept the offer in order for it to be accepted. 
+- The number of players in 1 + the number of responders (all players are responders, except the single proposer)
+- p now represents the total amount of money the a proposer will offer. They will now offer (p / (number of responders)) or the lowest value that they know the responder has accepted, whichever is lower, to each responder
+- Each responder will then consider their individual offer and reject or accept it. 
+- If the majority (> 50%) of responders accept the offer then each player will gain their respective amounts. (The responder will gain their offer amount; the proposer will gain 1 - (sum of offers).)
+- Note: when num_player == 3, the decision must be unanimous as the only way to get the majority of 2 responders to accept is to get both of them accept.
 
 ## Results from Replication 
 <table><tr>
@@ -29,7 +35,7 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 </tr></table>
 **Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal(w.) On the y-axis is the opulation's average q (minimum acceptance) and average p(maximum offer.)
 
-In both our replication and the original paper the greater the proportion of players who find out about any particular deal the more generous (higher p values) and selective (higher q values) the population becomes on average. Our replication has a lower intial slope, but does not stabilize as quickly as the original paper did. (The graph of the original paper flattens at about w = 0.15 and ours does not.) This disparity may be because the original paper ran the model on 10^5 generations, we were only able to run our replication on 10^4 generations due to limited time.
+In both our replication and the original paper the greater the proportion of players who find out about any particular deal the more generous (higher p values) and selective (higher q values) the population becomes on average. Our replication has a lower intial slope, but does not stabilize as quickly as the original paper did. (The graph of the original paper flattens at about w = 0.15 and ours does not.) 
 
 ## Results from Extension
 <table><tr>
@@ -47,7 +53,7 @@ In both our replication and the original paper the greater the proportion of pla
 
 ## Annotated Bibliography
 
-![Collective dynamics of `small-world' networks](../Original_Paper.pdf)
+![Collective dynamics of 'small-world' networks](../Original_Paper.pdf)
 
 Nowak, Martin A.; Page, Karen M.; Sigmund, Karl, Science (Sep 8, 2000): 1773-1775. 
 
