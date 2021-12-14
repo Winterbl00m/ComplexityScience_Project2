@@ -7,7 +7,7 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 
 ## Methodology
 ### Replication 
-- For this experiemt we will create a population of n agents each with two properties p and q.
+- For this experiment we will create a population of n agents each with two properties p and q.
 - To begin each agents p and q values will be randomly assigned. 
 - In each round a pair will randomly formed. One player will be assigned to be the proposer and the other will be the resonder. 
   - The proposer will offer their maximum offer, p, or the lowest value that they know the responder has accepted, whichever is lower.
@@ -26,22 +26,30 @@ For our extension much of the model above stayed the same, except that instead o
 - p now represents the total amount of money the a proposer will offer. They will now offer (p / (number of responders)) or the lowest value that they know the responder has accepted, whichever is lower, to each responder
 - Each responder will then consider their individual offer and reject or accept it. 
 - If the majority (> 50%) of responders accept the offer then each player will gain their respective amounts. (The responder will gain their offer amount; the proposer will gain 1 - (sum of offers).)
-- Note: when num_player == 3, the decision must be unanimous as the only way to get the majority of 2 responders to accept is to get both of them accept.
+- Note: when num_player = 3, the decision must be unanimous as the only way to get the majority of 2 responders to accept is to get both of them accept.
 
 ## Results from Replication 
 <table><tr>
 <td> <img src="images/Expected_Results.jpg" alt="Drawing" style="width: 500px;"/> </td>
-<td> <img src="images/replication.png" alt="Drawing" style="width: 500px;"/> </td>
+<td> <img src="images/original-replication-graph-1.png" alt="Drawing" style="width: 500px;"/> </td>
 </tr></table>
-**Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal(w.) On the y-axis is the opulation's average q (minimum acceptance) and average p(maximum offer.)
+
+**Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal (w). On the y-axis is the population's average q (minimum acceptance) and average p (maximum offer.)
 
 In both our replication and the original paper the greater the proportion of players who find out about any particular deal the more generous (higher p values) and selective (higher q values) the population becomes on average. Our replication has a lower intial slope, but does not stabilize as quickly as the original paper did. (The graph of the original paper flattens at about w = 0.15 and ours does not.) 
 
 ## Results from Extension
 <table><tr>
-<td> <img src="images/extension.png" alt="Drawing" style="width: 1000px;"/> </td>
+<td> <img src="images/extension-graph-1.png" alt="Drawing" style="width: 1000px;"/> </td>
 </tr></table>
-**Figure 2**: p and q vs w for different number of players. 
+
+**Figure 2**: p and q vs. w for different number of players. 
+
+Our extension results show that the evolution towards fairness is not present when there are 3 or 5 players in each round.
+
+In the case of 3 players, for small W values, the proposer only offers a small portion of their money, and the responder likewise accepts small offers. Above W = 0.1, the system evolves towards the proposer offering almost all their money (above 87.5%) to the responders, and responders accepting an offer only if it is near 50% of the total money. The 3 player case is not fair to the proposer, as the proposer gets substantially less than 1/n of the total money.
+
+In the case of 5 players, the system dynamics are nearly constant for all W values. The proposer offers just under half the money, and responders will accept anything close to or above their 1/4th of the remaining money. The 5 player case is now unfair to the responders, who each will get substantially less than the proposer.
 
 
 ## Conclusion
@@ -53,7 +61,7 @@ In both our replication and the original paper the greater the proportion of pla
 
 ## Annotated Bibliography
 
-![Collective dynamics of 'small-world' networks](../Original_Paper.pdf)
+[Collective dynamics of 'small-world' networks](../Original_Paper.pdf)
 
 Nowak, Martin A.; Page, Karen M.; Sigmund, Karl, Science (Sep 8, 2000): 1773-1775. 
 
