@@ -9,15 +9,17 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 ### Replication 
 - For this experiemt we will create a population of n agents each with two properties p and q.
 - To begin each agents p and q values will be randomly assigned. 
-- "When acting as proposer, the player offers the amount p. When acting as responder, the player rejects any offer smaller than q"
-- "In every generation, several random pairs are formed."
-  - "The proposer will offer, whatever is smaller, [their] own p-value or the minimum offer that [they know] has been accepted by the responder during previous encounters."
-  - There is also "a small (0.1) probability that proposers will make offers that are reduced by a small, randomly chosen amount (between 0 and 0.1)."
-  - "Hence, p can be seen as a proposer's maximum offer, whereas q represents a responder's minimum acceptance level."
-  - "Each accepted deal is made known to a fraction w of all players" 
-- "Each player will be proposer on average r (50) times and be responder the same number of times."
-- "The payoffs of all individuals are then summed up. For the next generation, individuals leave a number of offspring proportional to their total payoff. Offspring adopt their parent's p and q values plus a small random number from the interval (-0.005, 0.005)"
-- We will run the siulation  for 10^5 generation when equlibrium should be reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
+- In each round a pair will randomly formed. One player will be assigned to be the proposer and the other will be the resonder. 
+  - The proposer will offer their maximum offer, p, or the lowest value that they know the responder has accepted, whichever is lower.
+    - There is also a 0.1 probability that proposers will lower their offer by an random small amount (less than 0.1.)
+  - The responder will accept any offer greater than their minimum acceptable offer, q. 
+  - If the offer is accepted the players will gain their respective amounts. (The responder will gain the offer amount; the proposer will gain 1 - offer.)
+  - The accepted deal is made known to a proportion of players, w.
+- Rounds will procede until each player has been both a proposer and a responder an average of r (50) times each. 
+- The culumative payoff of all indivduals are then used to determine the number of offspring they leave for the next genreation (i.e "individuals leave a number of offspring proportional to their total payoff")
+- "Offspring adopt their parent's p and q values plus a small random number from the interval (-0.005, 0.005)"
+- We ran the siulation  for 10^4 generation when equlibrium should be reached and record the average p and q values for the population. We will then rerun the experiement for a range of w values to reproduce the chart shown below.
+
 ### Extension
 
 ## Results from Replication 
@@ -27,11 +29,13 @@ Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors whic
 </tr></table>
 **Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal(w.) On the y-axis is the opulation's average q (minimum acceptance) and average p(maximum offer.)
 
+In both our replication and the original paper the greater the proportion of players who find out about any particular deal the more generous (higher p values) and selective (higher q values) the population becomes on average. Our replication has a lower intial slope, but does not stabilize as quickly as the original paper did. (The graph of the original paper flattens at about w = 0.15 and ours does not.) This disparity may be because the original paper ran the model on 10^5 generations, we were only able to run our replication on 10^4 generations due to limited time.
+
 ## Results from Extension
 <table><tr>
 <td> <img src="images/extension.png" alt="Drawing" style="width: 1000px;"/> </td>
 </tr></table>
-**Figure 2**: p and q vs w for different number of players
+**Figure 2**: p and q vs w for different number of players. 
 
 
 ## Conclusion
