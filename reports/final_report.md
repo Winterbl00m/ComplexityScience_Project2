@@ -4,10 +4,10 @@
 ## Abstract
 Much like Prisoner's dillemma, the Ultimatum Game illustrates how behaviors which is coorporative and detrimental in the short term can prove adaptive in the long term. The Ultimatum Game is relativly simple one, two players are trying to decide how to divide a resource between them. One player, the proposer, makes a proposal to the the other player, the responder. The responder chooses whether or not to accept the offer. If the responder chooses to accept the offer, the resource is split in that way. However, if they choose to reject the offer, both players get nothing. In a one off game, a purely rational player should accept any offer above 0, as it is better to get something than nothing. A purely rational player should likewise offer the lowest amount possible, since the other rational player will accept. However, in a population where other players can learn about accepted offers, players evolve towards offering and accepting nearly equal values. Nowak et. al. proposes that this pattern is because a player can improve their winnings in future rounds by rejecting low offers, which will then lead to players winning less money if they offer only a small amount to others. We recreated their model and replicated their results. We then wondered how system dynamics would change if an offer had to be made to multiple responders and only the majority of responders needed to accept.
 
-
 ## Methodology
 ### Replication 
-- For this experiment we will create a population of n agents each with two properties p and q.
+We replicated the experiemnt done in "Collective dynamics of 'small-world' networks" by Nowak et. al. 
+- For this experiemt we will create a population of n agents each with two properties p and q.
 - To begin each agents p and q values will be randomly assigned. 
 - In each round a pair will randomly formed. One player will be assigned to be the proposer and the other will be the resonder. 
   - The proposer will offer their maximum offer, p, or the lowest value that they know the responder has accepted, whichever is lower.
@@ -37,7 +37,7 @@ For our extension, instead of only offering to one player, the propser is now ma
 
 **Figure 1**: On the x-axis is the proportion of players which learn about any one accepted deal (w). On the y-axis is the population's average q (minimum acceptance) and average p (maximum offer.)
 
-In both our replication and the original paper, the population becomes more generous (offering more money) and more selective (only accepting higher amounts) as more players are told about accepted deals. Our replication has a lower intial slope, but does not stabilize as quickly as the original paper did. (The graph of the original paper flattens at about w = 0.15 and ours does not.) 
+In both our replication and the original paper, the population becomes more generous (offering more money) and more selective (only accepting higher amounts) as more players are told about accepted deals. Our replication has a lower intial slope, but does not stabilize as quickly as the original paper did. (The graph of the original paper flattens at about w = 0.15 and ours does not.) Our replication also has a minor dip at w = 0.35, which we do not have an explanation for. 
 
 ## Results from Extension
 <table><tr>
@@ -52,7 +52,6 @@ In the case of 3 players, for small W values, the proposer only offers a small p
 
 In the case of 5 players, the system dynamics are nearly constant for all W values. The proposer offers just under half the money, and responders will accept anything close to or above their 1/4th of the remaining money. The 5 player case is now unfair to the responders, who each will get substantially less than the proposer.
 
-
 ## Conclusion
 
 Ultimatum game systems can evolve towards fairness, but not in all cases. Fairness is present with two players who tell other players about accepted offers, but not when players don't share information about completed offers, and not when there are 3 or 5 players. 
@@ -60,7 +59,7 @@ Ultimatum game systems can evolve towards fairness, but not in all cases. Fairne
 
 ## Further Exploration
 
-If we had more time we would like to run this experiment on more different number of players. As it stands only when num_players = 5 could a responder reject the offer, but the majority overule the rejection. It would be interesting to see if the pattern of proposers being more greedy when they only needed majority rule continues. Unfortunately, due to the runtime of our program, we were unable to explore these dynamics further in the time we had.
+If we had more time we would like to run this experiment on more different number of players. As it stands only when num_players = 5 could a responder reject the offer, but the majority overule the rejection. It would be interesting to see if the pattern of proposers being more greedy when they only needed majority rule continues. Additionally, we would like to explore higher w values, to see if there are any dynamics in our original replication related to the dip in p and q values. Unfortunately, due to the runtime of our program, we were unable to explore any of these dynamics further in the time we had.
 
 ## Annotated Bibliography
 
