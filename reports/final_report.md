@@ -49,7 +49,7 @@ In both our replication and the original paper the greater the proportion of pla
 
 
 ## Further Exploration
-
+If we had more time we would like to run this experiment on more different number of players. As it stands only when num_players == 5 could a responder reject the offer, but the majority overull them. It would be interesting to see if the pattern of proposer's being more greedy when they only needed majority rule continues. 
 
 ## Annotated Bibliography
 
